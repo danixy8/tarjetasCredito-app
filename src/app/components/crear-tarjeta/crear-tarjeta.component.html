@@ -1,0 +1,48 @@
+<div class="card">
+  <div class="card-body">
+    <h3 class="titulo mb-3">Crear Tarjeta</h3>
+    <form [formGroup]="form" (ngSubmit)="crearTarjeta()">
+      <div class="input-group input-group-lg mb-3">
+        <span class="input-group-text">
+          <fa-icon [icon]="faUserCircle"></fa-icon>
+        </span>
+        <input formControlName="titular" type="text" class="form-control" placeholder="Titular">
+      </div>
+      <div class="input-group input-group-lg mb-3">
+        <span class="input-group-text">
+          <fa-icon [icon]="faCreditCard"></fa-icon>
+        </span>
+        <input formControlName="numeroTarjeta" type="number" class="form-control" placeholder="Numero de Tarjeta">
+      </div>
+      <div class="row">
+
+        <div class="col-lg-7">
+          <div class="input-group input-group-lg mb-3">
+            <span class="input-group-text">
+              <fa-icon [icon]="faCalendarAlt"></fa-icon>
+            </span>
+            <input formControlName="fechaExpiracion" type="text" class="form-control" placeholder="MM/YY">
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="input-group input-group-lg mb-3">
+            <span class="input-group-text">
+              <fa-icon [icon]="faKey"></fa-icon>
+            </span>
+            <input formControlName="cvv" type="password" class="form-control" placeholder="CVV">
+          </div>
+        </div>
+      </div>
+      <div class="d-grid gap-2">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+        <fa-icon [icon]="faDatabase"></fa-icon>&nbsp;Aceptar</button>
+      </div>
+    </form>
+  </div>
+</div>
+<pre>is invalid? {{ form.invalid|json}}</pre>
+<pre>errors? {{ form.errors|json}}</pre>
+<pre>isPristine? {{ form.pristine|json}}</pre>
+<pre>fechaExpiracion errors: {{ form.get('fechaExpiracion')?.errors |json}}</pre>
+<pre>numeroTarjeta error: {{ form.get('numeroTarjeta')?.errors |json}}</pre>
+<pre>numeroTarjeta value: {{ form.get('numeroTarjeta')?.value |json}}</pre>
