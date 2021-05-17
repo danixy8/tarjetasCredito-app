@@ -1,35 +1,68 @@
 <div class="card">
   <div class="card-body">
     <h3 class="titulo mb-3">Crear Tarjeta</h3>
-    <form [formGroup]="form" (ngSubmit)="crearTarjeta()">
-      <div class="input-group input-group-lg mb-3">
-        <span class="input-group-text">
-          <fa-icon [icon]="faUserCircle"></fa-icon>
-        </span>
-        <input formControlName="titular" type="text" class="form-control" placeholder="Titular">
+    <form [formGroup]="form"
+          (ngSubmit)="crearTarjeta()">
+      <div  *ngIf="alertError"
+            class="alert alert-danger"
+            role="alert">
+            Uno o mas campos son incorrectos
       </div>
       <div class="input-group input-group-lg mb-3">
         <span class="input-group-text">
-          <fa-icon [icon]="faCreditCard"></fa-icon>
+          <fa-icon  [icon]="faUserCircle"
+                    [class.green-icon]="form.get('titular')?.valid"
+                    [class.red-icon]="validadorError('titular')">
+          </fa-icon>
         </span>
-        <input formControlName="numeroTarjeta" type="number" class="form-control" placeholder="Numero de Tarjeta">
+        <input  formControlName="titular"
+                type="text"
+                class="form-control"
+                placeholder="Titular">
+      </div>
+      <div class="input-group input-group-lg mb-3">
+        <span class="input-group-text">
+          <fa-icon  [icon]="faCreditCard"
+                    [class.green-icon]="form.get('numeroTarjeta')?.valid"
+                    [class.red-icon]="validadorError('numeroTarjeta')">
+          </fa-icon>
+        </span>
+        <input  formControlName="numeroTarjeta"
+                maxlength="16"
+                type="text"
+                class="form-control"
+                placeholder="Numero de Tarjeta">
       </div>
       <div class="row">
 
         <div class="col-lg-7">
           <div class="input-group input-group-lg mb-3">
             <span class="input-group-text">
-              <fa-icon [icon]="faCalendarAlt"></fa-icon>
+              <fa-icon  [icon]="faCalendarAlt"
+                        [class.green-icon]="form.get('fechaExpiracion')?.valid"
+                        [class.red-icon]="validadorError('fechaExpiracion')">
+              </fa-icon>
             </span>
-            <input formControlName="fechaExpiracion" type="text" class="form-control" placeholder="MM/YY">
+            <input  formControlName="fechaExpiracion"
+                    type="text"
+                    maxlength="5"
+                    class="form-control"
+                    placeholder="MM/YY">
           </div>
         </div>
         <div class="col-lg-5">
           <div class="input-group input-group-lg mb-3">
             <span class="input-group-text">
-              <fa-icon [icon]="faKey"></fa-icon>
+              <fa-icon  [icon]="faKey"
+                        [class.green-icon]="form.get('cvv')?.valid"
+                        [class.red-icon]="validadorError('cvv')">
+              </fa-icon>
             </span>
-            <input formControlName="cvv" type="password" class="form-control" placeholder="CVV">
+            <input  formControlName="cvv"
+                    type="password"
+                    maxlength="3"
+                    class="form-control"
+                    placeholder="CVV">
           </div>
         </div>
       </div>
@@ -40,9 +73,3 @@
     </form>
   </div>
 </div>
-<pre>is invalid? {{ form.invalid|json}}</pre>
-<pre>errors? {{ form.errors|json}}</pre>
-<pre>isPristine? {{ form.pristine|json}}</pre>
-<pre>fechaExpiracion errors: {{ form.get('fechaExpiracion')?.errors |json}}</pre>
-<pre>numeroTarjeta error: {{ form.get('numeroTarjeta')?.errors |json}}</pre>
-<pre>numeroTarjeta value: {{ form.get('numeroTarjeta')?.value |json}}</pre>
